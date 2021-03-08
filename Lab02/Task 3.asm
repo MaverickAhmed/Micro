@@ -1,34 +1,31 @@
-.model small    ;define small model 
-.stack 100h     ;reserves 100h bytes for program
-.data 
-.code 
+.model   small ;define small model 
+.stack 100h    ;reserves 100h bytes for program
+.data
+.code
 
-main proc      ;main procedure starts here
+main proc      ;main procedure started here
 
-mov ah,2       ;requests output
-mov dl,'?'     ;moves ? to dl, so that it can be printed
-int 21h        ;initiates the output
-mov dl,0ah     ;moves cursor to the start of next line
-int 21h        ;calls the interrupt handler
+;printing ? on screen to request output
+mov ah,2       ;output at ah
+mov dl,'?'     ;ASCII equivalent of ? goes in destination dl
+int 21h        ;prints output on the screen
+mov dl,0ah     ;moves cursor to start of next line
+int 21h        ;termination
 
-mov ah,1       ;requests input
-int 21h        ;initiates the input
-mov bh,ah      ;moves ah to bh registry
+;Getting input from user via keyboard
+mov ah,1       ;gets input from the user via keyboard
+int 21h        ;moves to next line                                                                                                                                                                                                                                                                                                                                                                                                         
+mov bl,al      ;moves value of al to bl
+mov ah,2       ;displays value of ah
+mov dl,0ah     ;moves cursor to start of next line
+int 21h        ;termination
 
-mov ah,2       ;requests output
-int 21h        ;initiates output sequence
-mov dl,0ah     ;moves cursor to the start of next line
-int 21h        ;calls the interrupt handler
+;converting lowercase alphabet to uppercase
+mov dl,bl      ;moves value stored in bl to dl
+sub dl,32      ;Subtracting 32 to get uppercase ASCII equivalent
+int 21h        ;moves to next line
 
-mov dl,bh      ;moves bh to dl registry
-sub dl,32      ;subtracts 32 from dl directry to get an uppercase equivalent of alphabet
-mov ah,2       ;requests output
-int 21h        ;initiates the output
-mov dl,0ah     ;moves cursor to the start of next line
-int 21h        ;calls the interrupt handler
-
-mov ah,4ch     ;terminates the program by moving cursor to the last line
-int 21h        ;calls the interrupt handler
- 
-main endp      ;ends the procedure
+mov ah,4ch     ;terminates the program by moving to last line
+int 21h        ;moves to next line
+main endp      ;ends the function, named "procedure"
 end main       ;ends the main program
