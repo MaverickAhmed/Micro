@@ -27,7 +27,7 @@ mov bl,ah
 int 21h
 
 mov ah,2
-mov dx,0ah
+mov dl,0ah
 int 21h
 
 ;Enter Number 2
@@ -43,7 +43,7 @@ mov ch,al
 int 21h
 
 mov ah,2
-mov dx,0ah
+mov dl,0ah
 int 21h
 
 ;Print Sum
@@ -58,7 +58,7 @@ mov ah,2
 int 21h
 
 mov ah,2
-mov dx,0ah
+mov dl,0ah
 int 21h
 
 ;Print Difference
@@ -72,7 +72,7 @@ mov ah,2
 int 21h
 
 mov ah,2
-mov dx,0ah
+mov dl,0ah
 int 21h
 
 
